@@ -17,14 +17,17 @@ async def main():
         users = set()
         with open("groups.txt", "r") as file:
             for line in file.readlines():
-                messages = await client.get_messages(line, limit=10000)
-                for message in messages:
-                    try:
-                        users.add(message.to_dict()['from_id']['user_id'])
-                        print('yes')
-                    except:
-                        print("oops")
-                time.sleep(400)
+                try:
+                    messages = await client.get_messages(line, limit=10000)
+                    for message in messages:
+                        try:
+                            users.add(message.to_dict()['from_id']['user_id'])
+                            print('yes')
+                        except:
+                            print("oops")
+                    time.sleep(400)
+                except:
+                    print("shiiit")
         for user in users:
             if user not in "5182790073, 649907279, 757000679".split(", "):
                 await client.send_message(user, """Предлагаем вступить в группу <a href='https://t.me/remont_georgia'>Ремонт Грузия</a>. 
