@@ -12,7 +12,7 @@ async def main():
 
     await client.start()
 
-    @client.on(events.NewMessage("https://t.me/+KKDQyEMlpUc0NDIy"))
+    @client.on(events.NewMessage("https://t.me/+dcnFPER2xqU0YWEy"))
     async def for_start_sending(message):
         users = set()
         with open("groups.txt", "r") as file:
