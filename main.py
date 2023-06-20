@@ -18,14 +18,16 @@ async def main():
         with open("groups.txt", "r") as file:
             for line in file.readlines():
                 try:
-                    messages = await client.get_messages(line, limit=10000)
-                    for message in messages:
-                        try:
-                            users.add(message.to_dict()['from_id']['user_id'])
-                            print('yes')
-                        except:
-                            print("oops")
-                    time.sleep(400)
+                    with open("ids.txt", "w+") as ids:
+                        messages = await client.get_messages(line, limit=10000)
+                        for message in messages:
+                            try:
+                                users.add(message.to_dict()['from_id']['user_id'])
+                                ids.write(str(message.to_dict()['from_id']['user_id']))
+                                print('yes')
+                            except:
+                                print("oops")
+                        time.sleep(400)
                 except:
                     print("shiiit")
         for user in users:
@@ -34,7 +36,7 @@ async def main():
 В группе можно размещать <i>бесплатно (всегда)</i> свои услуги по ремонту всего и вся в городах, в которых вы эти услуги предоставляете.
 Цель создания группы - помочь русскоязычным в каждом уголке прекрасной Грузии.
 <b>Всем мастерам предлагаем услуги мониторинга Телеграм по вашим ключевым словам.</b>""", parse_mode="HTML")
-                time.sleep(10)
+                time.sleep(400)
 
     await client.run_until_disconnected()
 
